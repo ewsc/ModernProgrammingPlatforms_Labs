@@ -1,19 +1,44 @@
-﻿public class Program
+﻿namespace LabUno
 {
-    static void Main()
+    public class Program
     {
-        ITracer tracer = new MethodTracer();
+        static void Main()
+        {
+            ITracer tracer = new MethodTracer();
+            tracer.StartTrace();
+            SumMethod();
+            tracer.StopTrace();
 
-        tracer.StartTrace();
-        ExampleMethod();
-        tracer.StopTrace();
+            Sorter sortir = new Sorter();
+            sortir.TraceAndSort();
+        }
+
+        static void SumMethod()
+        {
+            var sum = 0;
+            for (int i = 1; i <= 1000000; i++)
+            {
+                sum += i;
+            }
+        }
+
+        
     }
 
-    static void ExampleMethod()
+    public class Sorter
     {
-        for (int i = 0; i < 100000000; i++)
+        public void TraceAndSort()
         {
-            // Do some computation
+            ITracer tracer = new MethodTracer();
+            tracer.StartTrace();
+            SortMethod();
+            tracer.StopTrace();    
+        }
+        
+        static void SortMethod()
+        {
+            int[] numbers = { 4, 2, 7, 1, 9, 5, 3, 8, 6 };
+            Array.Sort(numbers);
         }
     }
 }

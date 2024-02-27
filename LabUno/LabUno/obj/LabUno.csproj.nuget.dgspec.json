@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "X:\\1Third_Year\\MPP\\LabUno\\LabUno\\LabUno.csproj": {}
+    "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabUno\\LabUno.csproj": {}
   },
   "projects": {
-    "X:\\1Third_Year\\MPP\\LabUno\\LabUno\\LabUno.csproj": {
+    "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabUno\\LabUno.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "X:\\1Third_Year\\MPP\\LabUno\\LabUno\\LabUno.csproj",
+        "projectUniqueName": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabUno\\LabUno.csproj",
         "projectName": "LabUno",
-        "projectPath": "X:\\1Third_Year\\MPP\\LabUno\\LabUno\\LabUno.csproj",
+        "projectPath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabUno\\LabUno.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "X:\\1Third_Year\\MPP\\LabUno\\LabUno\\obj\\",
+        "outputPath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabUno\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config"

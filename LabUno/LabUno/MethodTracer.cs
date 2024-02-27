@@ -2,50 +2,54 @@
 using System.Diagnostics;
 using System.Reflection;
 
-public interface ITracer
+namespace LabUno
 {
-    void StartTrace();
-    void StopTrace();
-}
-
-public class MethodTracer : ITracer
-{
-    private Stopwatch stopwatch;
-    private TraceResult traceResult;
-
-    public void StartTrace()
+    public interface ITracer
     {
-        stopwatch = new Stopwatch();
-        traceResult = new TraceResult();
-        stopwatch.Start();
+        void StartTrace();
+        void StopTrace();
     }
 
-    public void StopTrace()
+    public class MethodTracer : ITracer
     {
-        stopwatch.Stop();
-        TimeSpan elapsed = stopwatch.Elapsed;
-        traceResult.ElapsedMilliseconds = elapsed.TotalMilliseconds;
+        private Stopwatch stopwatch;
+        private TraceResult traceResult;
 
-        StackTrace stackTrace = new StackTrace();
-        MethodBase methodBase = stackTrace.GetFrame(1).GetMethod();
-        traceResult.MethodName = methodBase.Name;
-        traceResult.ClassName = methodBase.DeclaringType.Name;
+        public void StartTrace()
+        {
+            stopwatch = new Stopwatch();
+            traceResult = new TraceResult();
+            stopwatch.Start();
+        }
 
-        PrintTraceResult();
+        public void StopTrace()
+        {
+            stopwatch.Stop();
+            TimeSpan elapsed = stopwatch.Elapsed;
+            traceResult.ElapsedMilliseconds = elapsed.TotalMilliseconds;
+
+            StackTrace stackTrace = new StackTrace();
+            MethodBase methodBase = stackTrace.GetFrame(1).GetMethod();
+            traceResult.MethodName = methodBase.Name;
+            traceResult.ClassName = methodBase.DeclaringType.Name;
+
+            PrintTraceResult();
+        }
+
+        private void PrintTraceResult()
+        {
+            Console.WriteLine($"Method: {traceResult.MethodName};");
+            Console.WriteLine($"Class: {traceResult.ClassName}();");
+            Console.WriteLine($"Execution time: {traceResult.ElapsedMilliseconds} ms;");
+            Console.WriteLine();
+        }
     }
 
-    private void PrintTraceResult()
+    public class TraceResult
     {
-        Console.WriteLine($"Method: {traceResult.MethodName}");
-        Console.WriteLine($"Class: {traceResult.ClassName}");
-        Console.WriteLine($"Execution time: {traceResult.ElapsedMilliseconds} ms");
+        public string MethodName { get; set; }
+        public string ClassName { get; set; }
+        public double ElapsedMilliseconds { get; set; }
     }
-}
-
-public class TraceResult
-{
-    public string MethodName { get; set; }
-    public string ClassName { get; set; }
-    public double ElapsedMilliseconds { get; set; }
 }
 
