@@ -1,0 +1,1 @@
+{"ElapsedMilliseconds":0,"Methods":[{"Name":"Main","ClassName":"Program","ElapsedMilliseconds":0.5534,"Methods":[{"Name":"MyMethod","ClassName":"Foo","ElapsedMilliseconds":0.5534,"Methods":[{"Name":"InnerMethod","ClassName":"Bar","ElapsedMilliseconds":0.5534,"Methods":[]}]}]}]}

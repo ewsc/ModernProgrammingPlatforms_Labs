@@ -48,5 +48,6 @@ public class Program
 
         string jsonResult = tracer.GetTraceResult();
         Console.WriteLine(jsonResult);
+        File.WriteAllText("results.json", jsonResult);
     }
 }
