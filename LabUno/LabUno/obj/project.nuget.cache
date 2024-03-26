@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "lk4ikWcIxrSxqxRyGxfG9Om6ZWn1ii+yVlkcoDeVt9NuZTOn9x1iZALUoHO3pyUDI5370PfT53TJc2qszAGkOg==",
+  "dgSpecHash": "/z3FlI1HNzD7O7DrwRdfdkDWXjCvNT6gUSg6VeasLV8QTX42VRszgOiUcefOXhOuDGFBXjNN3QfbEKE0PGkYIw==",
   "success": true,
   "projectFilePath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabUno\\LabUno.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.codecoverage\\17.9.0\\microsoft.codecoverage.17.9.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.net.test.sdk\\17.9.0\\microsoft.net.test.sdk.17.9.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.9.0\\microsoft.testplatform.objectmodel.17.9.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.testplatform.testhost\\17.9.0\\microsoft.testplatform.testhost.17.9.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\nunit\\4.1.0\\nunit.4.1.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
+  ],
   "logs": []
 }

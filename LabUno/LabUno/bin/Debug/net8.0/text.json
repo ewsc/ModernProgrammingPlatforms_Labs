@@ -4,12 +4,12 @@
     {
       "Name": "Main",
       "ClassName": "Program",
-      "ElapsedMilliseconds": 0.7995,
+      "ElapsedMilliseconds": 0.6492,
       "Methods": [
         {
           "Name": "MyMethod",
           "ClassName": "Foo",
-          "ElapsedMilliseconds": 0.7995,
+          "ElapsedMilliseconds": 0.6492,
           "Methods": []
         }
       ]

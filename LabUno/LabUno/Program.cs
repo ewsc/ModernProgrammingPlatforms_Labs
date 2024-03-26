@@ -2,6 +2,7 @@
 
 namespace LabUno
 {
+    
     public class Program
     {
         static void Main()
@@ -35,6 +36,7 @@ namespace LabUno
         public void MyMethod()
         {
             _tracer.StartTrace();
+            // Code of MyMethod
             _tracer.StopTrace();
         }
     }
