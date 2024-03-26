@@ -17,6 +17,22 @@ namespace LabUno.Tests
             _methodTracer = new MethodTracer();
             _tracer = (ITracer)_methodTracer;
         }
+        
+        [Test]
+        public void StartTrace_StopTrace_GetTraceResult_ReturnsValidTraceResult()
+        {
+            string expectedMethodName = "TestMethod";
+            string expectedClassName = "TestClass";
+
+            _tracer.StartTrace();
+            TestClass.TestMethod();
+            _tracer.StopTrace();
+            string traceResult = _tracer.GetTraceResult();
+
+            Assert.That(traceResult, Is.Not.Null);
+            TraceResult result = JsonSerializer.Deserialize<TraceResult>(traceResult);
+
+        }
 
         [Test]
         public void WriteTraceResult_ConsoleTraceResultWriter_WritesToConsole()

@@ -44,7 +44,6 @@ namespace LabUno
         public void FooMethod()
         {
             _tracer.StartTrace();
-            // Code of MyMethod
             Boo boo = new Boo(_tracer);
             boo.BooMethod();
             _tracer.StopTrace();
@@ -63,7 +62,6 @@ namespace LabUno
         public void BooMethod()
         {
             _tracer.StartTrace();
-            // Code of MyMethod
             _tracer.StopTrace();
         }
     }
