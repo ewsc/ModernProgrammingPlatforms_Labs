@@ -1,53 +1,173 @@
-﻿namespace LabUno;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
+using System.Xml.Serialization;
 
-public class Foo
+namespace LabUno
 {
-    private Bar _bar;
-    private ITracer _tracer;
-
-    internal Foo(ITracer tracer)
+    public interface ITracer
     {
-        _tracer = tracer;
-        _bar = new Bar(_tracer);
+        void StartTrace();
+        void StopTrace();
+        string GetTraceResult();
     }
 
-    public void MyMethod()
+    public class TraceResult
     {
-        _tracer.StartTrace();
-        _bar.InnerMethod();
-        _tracer.StopTrace();
+        public string Name { get; }
+        public string ClassName { get; }
+        public double ElapsedMilliseconds { get; set; }
+        public List<TraceResult> Methods { get; } // Change IReadOnlyList to List
+
+        public TraceResult() 
+        {
+            Methods = new List<TraceResult>(); // Initialize Methods in the constructor
+        }
+
+        public TraceResult(string name, string className, double elapsedMilliseconds, List<TraceResult> methods) // Change IReadOnlyList to List
+        {
+            Name = name;
+            ClassName = className;
+            ElapsedMilliseconds = elapsedMilliseconds;
+            Methods = methods;
+        }
     }
-}
 
-public class Bar
-{
-    private ITracer _tracer;
-
-    internal Bar(ITracer tracer)
+    public class MethodTracer : ITracer
     {
-        _tracer = tracer;
+        private readonly Stopwatch _stopwatch;
+        private readonly Stack<TraceResult> _traceStack;
+        private readonly TraceResult _rootTraceResult;
+        private TraceResult _currentParent;
+
+        public MethodTracer()
+        {
+            _stopwatch = new Stopwatch();
+            _traceStack = new Stack<TraceResult>();
+            _rootTraceResult = new TraceResult();
+            _currentParent = _rootTraceResult;
+        }
+
+        public void StartTrace()
+        {
+            lock (_traceStack)
+            {
+                _stopwatch.Start();
+                var stackFrame = new StackFrame(1);
+                var declaringType = stackFrame.GetMethod().DeclaringType;
+                var methodName = stackFrame.GetMethod().Name;
+                var className = declaringType != null ? declaringType.Name : string.Empty;
+
+                TraceResult traceResult = new TraceResult(methodName, className, 0, new List<TraceResult>());
+
+                _currentParent.Methods.Add(traceResult);
+                _traceStack.Push(_currentParent);
+                _currentParent = traceResult;
+            }
+        }
+
+        public void StopTrace()
+        {
+            lock (_traceStack)
+            {
+                _stopwatch.Stop();
+                TimeSpan elapsed = _stopwatch.Elapsed;
+                _currentParent.ElapsedMilliseconds = elapsed.TotalMilliseconds;
+
+                _currentParent = _traceStack.Pop();
+            }
+        }
+
+        public string GetTraceResult()
+        {
+            return SerializeTraceResult(_rootTraceResult);
+        }
+
+        private string SerializeTraceResult(TraceResult traceResult)
+        {
+            var jsonOptions = new JsonSerializerOptions
+            {
+                IgnoreNullValues = true,
+                WriteIndented = true
+            };
+            string jsonResult = JsonSerializer.Serialize(traceResult, jsonOptions);
+
+            var xmlSerializer = new XmlSerializer(typeof(TraceResult));
+            using (var writer = new StringWriter())
+            {
+                xmlSerializer.Serialize(writer, traceResult);
+                string xmlResult = writer.ToString();
+            }
+
+            return jsonResult;
+        }
     }
 
-    public void InnerMethod()
+    public interface ITraceResultWriter
     {
-        _tracer.StartTrace();
-        _tracer.StopTrace();
+        void WriteTraceResult(string result);
     }
-}
 
-public class Program
-{
-    static void Main()
+    public class ConsoleTraceResultWriter : ITraceResultWriter
     {
-        ITracer tracer = new MethodTracer();
+        public void WriteTraceResult(string result)
+        {
+            Console.WriteLine(result);
+        }
+    }
 
-        tracer.StartTrace();
-        Foo foo = new Foo(tracer);
-        foo.MyMethod();
-        tracer.StopTrace();
+    public class FileTraceResultWriter : ITraceResultWriter
+    {
+        private readonly string _filePath;
 
-        string jsonResult = tracer.GetTraceResult();
-        Console.WriteLine(jsonResult);
-        File.WriteAllText("results.json", jsonResult);
+        public FileTraceResultWriter(string filePath)
+        {
+            _filePath = filePath;
+        }
+
+        public void WriteTraceResult(string result)
+        {
+            File.WriteAllText(_filePath, result);
+        }
+    }
+
+    public class Program
+    {
+        static void Main()
+        {
+            ITracer tracer = new MethodTracer();
+
+            tracer.StartTrace();
+            Foo foo = new Foo(tracer);
+            foo.MyMethod();
+            tracer.StopTrace();
+
+            string traceResult = tracer.GetTraceResult();
+
+            ITraceResultWriter consoleWriter = new ConsoleTraceResultWriter();
+            consoleWriter.WriteTraceResult(traceResult);
+
+            ITraceResultWriter fileWriter = new FileTraceResultWriter("text.json");
+            fileWriter.WriteTraceResult(traceResult);
+        }
+    }
+
+    public class Foo
+    {
+        private readonly ITracer _tracer;
+
+        public Foo(ITracer tracer)
+        {
+            _tracer = tracer;
+        }
+
+        public void MyMethod()
+        {
+            _tracer.StartTrace();
+            // Code of MyMethod
+            _tracer.StopTrace();
+        }
     }
 }

@@ -1,0 +1,18 @@
+{
+  "ElapsedMilliseconds": 0,
+  "Methods": [
+    {
+      "Name": "Main",
+      "ClassName": "Program",
+      "ElapsedMilliseconds": 1.0905,
+      "Methods": [
+        {
+          "Name": "MyMethod",
+          "ClassName": "Foo",
+          "ElapsedMilliseconds": 1.0905,
+          "Methods": []
+        }
+      ]
+    }
+  ]
+}
