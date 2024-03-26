@@ -5,15 +5,23 @@ namespace LabUno
     
     public class Program
     {
+
+        public static void ProgramMethod(ITracer _tracer)
+        {
+            _tracer.StartTrace();
+            _tracer.StopTrace();
+        
+        }
         static void Main()
         {
             ITracer tracer = new MethodTracer();
 
             tracer.StartTrace();
             Foo foo = new Foo(tracer);
-            foo.MyMethod();
+            foo.FooMethod();
             tracer.StopTrace();
 
+            ProgramMethod(tracer);
             string traceResult = tracer.GetTraceResult();
 
             ITraceResultWriter consoleWriter = new ConsoleTraceResultWriter();
@@ -33,7 +41,26 @@ namespace LabUno
             _tracer = tracer;
         }
 
-        public void MyMethod()
+        public void FooMethod()
+        {
+            _tracer.StartTrace();
+            // Code of MyMethod
+            Boo boo = new Boo(_tracer);
+            boo.BooMethod();
+            _tracer.StopTrace();
+        }
+    }
+    
+    public class Boo
+    {
+        private readonly ITracer _tracer;
+
+        public Boo(ITracer tracer)
+        {
+            _tracer = tracer;
+        }
+
+        public void BooMethod()
         {
             _tracer.StartTrace();
             // Code of MyMethod

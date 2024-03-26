@@ -4,15 +4,28 @@
     {
       "Name": "Main",
       "ClassName": "Program",
-      "ElapsedMilliseconds": 0.6492,
+      "ElapsedMilliseconds": 0.6683,
       "Methods": [
         {
-          "Name": "MyMethod",
+          "Name": "FooMethod",
           "ClassName": "Foo",
-          "ElapsedMilliseconds": 0.6492,
-          "Methods": []
+          "ElapsedMilliseconds": 0.6683,
+          "Methods": [
+            {
+              "Name": "BooMethod",
+              "ClassName": "Boo",
+              "ElapsedMilliseconds": 0.6683,
+              "Methods": []
+            }
+          ]
         }
       ]
+    },
+    {
+      "Name": "ProgramMethod",
+      "ClassName": "Program",
+      "ElapsedMilliseconds": 0.6796,
+      "Methods": []
     }
   ]
 }
