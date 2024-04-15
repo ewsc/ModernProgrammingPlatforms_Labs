@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
+namespace LabDos;
 
-namespace LabDos
-{
     public class Faker
     {
         private readonly Dictionary<Type, Func<Faker, object>> _generators;
@@ -136,7 +135,7 @@ namespace LabDos
                 || type == typeof(Uri);
         }
 
-        private int NextRandomInt()
+        internal int NextRandomInt()
         {
             return new Random().Next();
         }
@@ -146,7 +145,7 @@ namespace LabDos
             return new Random().Next();
         }
 
-        private double NextRandomDouble()
+        internal double NextRandomDouble()
         {
             return new Random().NextDouble();
         }
@@ -156,13 +155,13 @@ namespace LabDos
             return (float)new Random().NextDouble();
         }
 
-        private string NextRandomString()
+        public string NextRandomString()
         {
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             return new string(Enumerable.Repeat(chars, 10).Select(s => s[new Random().Next(s.Length)]).ToArray());
         }
 
-        private DateTime NextRandomDateTime()
+        public DateTime NextRandomDateTime()
         {
             var start = new DateTime(1995, 1, 1);
             var end = new DateTime(2050, 12, 31);
@@ -175,4 +174,3 @@ namespace LabDos
             return new Uri("http://example.com");
         }
     }
-}
