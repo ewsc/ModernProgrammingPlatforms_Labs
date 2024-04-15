@@ -1,0 +1,15 @@
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\bin\Debug\net8.0\LabDos.exe
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\bin\Debug\net8.0\LabDos.deps.json
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\bin\Debug\net8.0\LabDos.runtimeconfig.json
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\bin\Debug\net8.0\LabDos.dll
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\bin\Debug\net8.0\LabDos.pdb
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.GeneratedMSBuildEditorConfig.editorconfig
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.AssemblyInfoInputs.cache
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.AssemblyInfo.cs
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.csproj.CoreCompileInputs.cache
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.sourcelink.json
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.dll
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\refint\LabDos.dll
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.pdb
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\LabDos.genruntimeconfig.cache
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabDos\LabDos\obj\Debug\net8.0\ref\LabDos.dll
