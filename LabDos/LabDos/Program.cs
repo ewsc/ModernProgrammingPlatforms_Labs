@@ -1,5 +1,5 @@
-﻿namespace LabDos;
-
+﻿namespace LabDos
+{
     public class Foo
     {
         public int Id { get; set; }
@@ -26,7 +26,6 @@
             var faker = new Faker();
 
             faker.RegisterGenerator(GenerateFoo);
-
             faker.RegisterGenerator(GenerateBar);
 
             var foo = faker.Create<Foo>();
@@ -34,10 +33,10 @@
 
             Console.WriteLine($"Foo: Id={foo.Id}, Name={foo.Name}, Bar.Value={foo.Bar.Value}, Bar.Timestamp={foo.Bar.Timestamp}");
 
-            if (bar != null)
+            if (foo.Bar != null)
             {
                 Console.WriteLine("Bar.Tags:");
-                foreach (var tag in bar.Tags)
+                foreach (var tag in foo.Bar.Tags)
                 {
                     Console.WriteLine(tag);
                 }
@@ -60,7 +59,8 @@
             {
                 Value = (decimal)faker.NextRandomDouble(),
                 Timestamp = faker.NextRandomDateTime(),
-                Tags = faker.Create<List<string>>()
+                Tags = faker.CreateList<string>(5)
             };
         }
     }
+}

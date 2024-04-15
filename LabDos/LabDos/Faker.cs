@@ -1,6 +1,10 @@
-﻿using System.Reflection;
-namespace LabDos;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
+namespace LabDos
+{
     public class Faker
     {
         private readonly Dictionary<Type, Func<Faker, object>> _generators;
@@ -18,7 +22,6 @@ namespace LabDos;
             RegisterGenerator<string>(faker => faker.NextRandomString());
             RegisterGenerator(faker => faker.NextRandomDateTime());
             RegisterGenerator<Uri>(faker => faker.NextRandomUri());
-        
         }
 
         public void RegisterGenerator<T>(Func<Faker, T> generator)
@@ -82,7 +85,7 @@ namespace LabDos;
 
             return instance!;
         }
-        
+
         private object GenerateSimpleValue(Type type)
         {
             if (type == typeof(int))
@@ -173,4 +176,17 @@ namespace LabDos;
         {
             return new Uri("http://example.com");
         }
+
+        public List<T> CreateList<T>(int count)
+        {
+            var list = new List<T>();
+
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(Create<T>());
+            }
+
+            return list;
+        }
     }
+}
