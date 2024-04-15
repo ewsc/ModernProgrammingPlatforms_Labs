@@ -3,8 +3,8 @@
     public class Foo
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Bar Bar { get; set; }
+        public string? Name { get; set; }
+        public Bar? Bar { get; set; }
     }
 
     public class Bar
@@ -29,17 +29,13 @@
             faker.RegisterGenerator(GenerateBar);
 
             var foo = faker.Create<Foo>();
-            var bar = faker.Create<Bar>();
 
-            Console.WriteLine($"Foo: Id={foo.Id}, Name={foo.Name}, Bar.Value={foo.Bar.Value}, Bar.Timestamp={foo.Bar.Timestamp}");
+            Console.WriteLine($"Foo: Id={foo.Id}, Name={foo.Name}, Bar.Value={foo.Bar!.Value}, Bar.Timestamp={foo.Bar.Timestamp}");
 
-            if (foo.Bar != null)
+            Console.WriteLine("Bar.Tags:");
+            foreach (var tag in foo.Bar.Tags)
             {
-                Console.WriteLine("Bar.Tags:");
-                foreach (var tag in foo.Bar.Tags)
-                {
-                    Console.WriteLine(tag);
-                }
+                Console.WriteLine(tag);
             }
         }
 
