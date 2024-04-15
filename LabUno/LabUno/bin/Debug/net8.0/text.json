@@ -4,17 +4,17 @@
     {
       "Name": "Main",
       "ClassName": "Program",
-      "ElapsedMilliseconds": 0.6683,
+      "ElapsedMilliseconds": 0.8417,
       "Methods": [
         {
           "Name": "FooMethod",
           "ClassName": "Foo",
-          "ElapsedMilliseconds": 0.6683,
+          "ElapsedMilliseconds": 0.8417,
           "Methods": [
             {
               "Name": "BooMethod",
               "ClassName": "Boo",
-              "ElapsedMilliseconds": 0.6683,
+              "ElapsedMilliseconds": 0.8417,
               "Methods": []
             }
           ]
@@ -24,7 +24,7 @@
     {
       "Name": "ProgramMethod",
       "ClassName": "Program",
-      "ElapsedMilliseconds": 0.6796,
+      "ElapsedMilliseconds": 0.8537,
       "Methods": []
     }
   ]

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabUno", "LabUno\LabUno.csproj", "{18793117-F034-4E56-9279-7BEF145227FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabDos", "..\LabDos\LabDos\LabDos.csproj", "{12027D0A-19B2-49A6-9A86-2CE23A335E3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{18793117-F034-4E56-9279-7BEF145227FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18793117-F034-4E56-9279-7BEF145227FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18793117-F034-4E56-9279-7BEF145227FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
