@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LabUno")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f61d212a22f0192ef5b719b5bbd55440de620ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32f2ca1869e5dc42dcec9d06284ba1e1ec4234c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("LabUno")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LabUno")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

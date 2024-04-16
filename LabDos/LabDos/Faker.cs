@@ -19,7 +19,7 @@ namespace LabDos
             RegisterGenerator(faker => faker.NextRandomLong());
             RegisterGenerator(faker => faker.NextRandomDouble());
             RegisterGenerator(faker => faker.NextRandomFloat());
-            RegisterGenerator<string>(faker => faker.NextRandomString());
+            RegisterGenerator<string>(faker => faker.NextRandomString(10));
             RegisterGenerator(faker => faker.NextRandomDateTime());
             RegisterGenerator<Uri>(faker => faker.NextRandomUri());
         }
@@ -110,7 +110,7 @@ namespace LabDos
 
             if (type == typeof(string))
             {
-                return NextRandomString();
+                return NextRandomString(10);
             }
 
             if (type == typeof(DateTime))
@@ -158,10 +158,14 @@ namespace LabDos
             return (float)new Random().NextDouble();
         }
 
-        public string NextRandomString()
+        public string NextRandomString(int length)
         {
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            return new string(Enumerable.Repeat(chars, 10).Select(s => s[new Random().Next(s.Length)]).ToArray());
+            var random = new Random();
+
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)])
+                .ToArray());
         }
 
         public DateTime NextRandomDateTime()
@@ -174,7 +178,16 @@ namespace LabDos
 
         private Uri NextRandomUri()
         {
-            return new Uri("http://example.com");
+            var random = new Random();
+
+            var scheme = "https";
+            var host = NextRandomString(10);
+            var path = NextRandomString(20);
+            var domain = NextRandomString(3);
+
+            var url = $"{scheme}://{host}/{path}.{domain}";
+
+            return new Uri(url);
         }
 
         public List<T> CreateList<T>(int count)

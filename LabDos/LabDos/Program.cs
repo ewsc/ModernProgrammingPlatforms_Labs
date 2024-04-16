@@ -44,7 +44,7 @@
             return new Foo
             {
                 Id = faker.NextRandomInt(),
-                Name = faker.NextRandomString(),
+                Name = faker.NextRandomString(10),
                 Bar = faker.Create<Bar>()
             };
         }
