@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace LabDos
 {
@@ -176,16 +173,18 @@ namespace LabDos
             return start.AddDays(new Random().Next(range));
         }
 
-        private Uri NextRandomUri()
+        public Uri NextRandomUri()
         {
             var random = new Random();
 
             var scheme = "https";
-            var host = NextRandomString(10);
-            var path = NextRandomString(20);
+            var amount = random.Next(7, 13);
+            var host = NextRandomString(amount);
+            var amount2 = random.Next(7, 13);
+            var path = NextRandomString(amount2);
             var domain = NextRandomString(3);
 
-            var url = $"{scheme}://{host}/{path}.{domain}";
+            var url = $"{scheme}://{host}.{domain}/{path}";
 
             return new Uri(url);
         }

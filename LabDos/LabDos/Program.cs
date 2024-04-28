@@ -11,9 +11,11 @@
     {
         public decimal Value { get; set; }
         public DateTime Timestamp { get; set; }
+        
+        public Uri Address { get; set; }
         public List<string> Tags { get; set; }
-
-        public Bar()
+        
+    public Bar()
         {
             Tags = new List<string>();
         }
@@ -27,16 +29,27 @@
 
             faker.RegisterGenerator(GenerateFoo);
             faker.RegisterGenerator(GenerateBar);
+            faker.RegisterGenerator(GenerateList);
 
+            
             var foo = faker.Create<Foo>();
+            var rInt = faker.Create<int>();
+            var list = faker.CreateList<string>(5);
+            
 
             Console.WriteLine($"Foo: Id={foo.Id}, Name={foo.Name}, Bar.Value={foo.Bar!.Value}, Bar.Timestamp={foo.Bar.Timestamp}");
 
-            Console.WriteLine("Bar.Tags:");
-            foreach (var tag in foo.Bar.Tags)
+            Console.WriteLine("\nFaked Int: " + rInt);
+            Console.WriteLine("\nList items:");
+            foreach (var listik in list)
             {
-                Console.WriteLine(tag);
+                Console.WriteLine(listik);
             }
+        }
+
+        private static List<string> GenerateList(Faker faker)
+        {
+            return faker.CreateList<string>(5);
         }
 
         private static Foo GenerateFoo(Faker faker)
