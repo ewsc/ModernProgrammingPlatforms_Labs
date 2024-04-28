@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace AssemblyInfoLibrary
+namespace LabTres
 {
     public class AssemblyInfo
     {
@@ -44,8 +42,10 @@ namespace AssemblyInfoLibrary
                 MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
                 foreach (MethodInfo method in methods)
                 {
-                    string signature = $"{method.ReturnType.Name} {method.Name}({GetParameterList(method.GetParameters())})";
-                    MemberInfo memberInfo = new MemberInfo(method.Name, signature);
+                    string returnType = method.ReturnType.Name;
+                    string methodName = method.Name;
+                    string signature = $"{returnType} {methodName}({GetParameterList(method.GetParameters())})";
+                    MemberInfo memberInfo = new MemberInfo(methodName, signature);
                     typeInfo.Members.Add(memberInfo);
                 }
 
