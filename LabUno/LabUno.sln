@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabUno", "LabUno\LabUno.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabDos", "..\LabDos\LabDos\LabDos.csproj", "{12027D0A-19B2-49A6-9A86-2CE23A335E3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabTres", "LabTres\LabTres.csproj", "{3ED55026-4F7B-4D56-8012-643909F5738B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12027D0A-19B2-49A6-9A86-2CE23A335E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED55026-4F7B-4D56-8012-643909F5738B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED55026-4F7B-4D56-8012-643909F5738B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED55026-4F7B-4D56-8012-643909F5738B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED55026-4F7B-4D56-8012-643909F5738B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
