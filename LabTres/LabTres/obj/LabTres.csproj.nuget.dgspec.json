@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabTres\\LabTres.csproj": {}
+    "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabTres\\LabTres\\LabTres.csproj": {}
   },
   "projects": {
-    "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabTres\\LabTres.csproj": {
+    "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabTres\\LabTres\\LabTres.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabTres\\LabTres.csproj",
+        "projectUniqueName": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabTres\\LabTres\\LabTres.csproj",
         "projectName": "LabTres",
-        "projectPath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabTres\\LabTres.csproj",
+        "projectPath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabTres\\LabTres\\LabTres.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabUno\\LabTres\\obj\\",
+        "outputPath": "X:\\1Third_Year\\MPP\\ModernProgrammingPlatforms_Labs\\LabTres\\LabTres\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config"
