@@ -20,3 +20,7 @@ X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\obj\Debug\net
 X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\obj\Debug\net8.0-windows\LabTres.pdb
 X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\obj\Debug\net8.0-windows\LabTres.genruntimeconfig.cache
 X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\obj\Debug\net8.0-windows\ref\LabTres.dll
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\bin\Debug\net8.0-windows\nunit.framework.dll
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\bin\Debug\net8.0-windows\nunit.framework.legacy.dll
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\obj\Debug\net8.0-windows\LabTres.csproj.AssemblyReference.cache
+X:\1Third_Year\MPP\ModernProgrammingPlatforms_Labs\LabTres\LabTres\obj\Debug\net8.0-windows\LabTres.csproj.Up2Date

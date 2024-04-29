@@ -17,23 +17,16 @@ namespace LabTres.Tests
         [Test]
         public void LoadAssembly_ValidPath_PopulatesNamespaces()
         {
-            // Act
-            // You can add additional assertions here to verify the populated namespaces, types, and members
-
-            // Assert
             Assert.That(assemblyInfo.Namespaces, Is.Not.Null.And.Not.Empty);
         }
 
         [Test]
         public void GetOrCreateNamespace_NewNamespace_ReturnsNewNamespaceInfo()
         {
-            // Arrange
             string namespaceName = "MyNamespace";
 
-            // Act
             NamespaceInfo namespaceInfo = assemblyInfo.GetOrCreateNamespace(namespaceName);
 
-            // Assert
             Assert.That(namespaceInfo, Is.Not.Null);
             Assert.That(namespaceInfo.Name, Is.EqualTo(namespaceName));
             Assert.That(assemblyInfo.Namespaces, Contains.Item(namespaceInfo));
@@ -42,13 +35,10 @@ namespace LabTres.Tests
         [Test]
         public void GetOrCreateNamespace_ExistingNamespace_ReturnsExistingNamespaceInfo()
         {
-            // Arrange
             string namespaceName = "System";
 
-            // Act
             NamespaceInfo namespaceInfo = assemblyInfo.GetOrCreateNamespace(namespaceName);
 
-            // Assert
             Assert.That(namespaceInfo, Is.Not.Null);
             Assert.That(namespaceInfo.Name, Is.EqualTo(namespaceName));
             Assert.That(assemblyInfo.Namespaces, Contains.Item(namespaceInfo));
