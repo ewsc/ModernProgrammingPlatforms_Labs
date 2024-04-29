@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LabTres")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a428b573bde03a03544ca354923a035a3ba336e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b17be7c7fc2676b30cad2d5cf105acb9fc05af62")]
 [assembly: System.Reflection.AssemblyProductAttribute("LabTres")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LabTres")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

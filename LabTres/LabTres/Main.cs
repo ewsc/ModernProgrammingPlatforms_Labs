@@ -61,7 +61,7 @@ namespace LabTres
             }
         }
 
-        private NamespaceInfo GetOrCreateNamespace(string namespaceName)
+        public NamespaceInfo GetOrCreateNamespace(string namespaceName)
         {
             foreach (NamespaceInfo namespaceInfo in Namespaces)
             {
@@ -74,7 +74,7 @@ namespace LabTres
             return newNamespaceInfo;
         }
 
-        private string GetParameterList(ParameterInfo[] parameters)
+        public string GetParameterList(ParameterInfo[] parameters)
         {
             List<string> parameterList = new List<string>();
             foreach (ParameterInfo parameter in parameters)
