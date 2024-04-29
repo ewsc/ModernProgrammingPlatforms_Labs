@@ -2,6 +2,11 @@
 
 namespace LabTres
 {
+    public class TEST_CLASS_NAME
+    {
+        
+    }
+    
     public class AssemblyInfo
     {
         public string Name { get; set; }
@@ -12,11 +17,13 @@ namespace LabTres
             Namespaces = new List<NamespaceInfo>();
             LoadAssembly(assemblyPath);
         }
+        
 
         private void LoadAssembly(string assemblyPath)
         {
             Assembly assembly = Assembly.LoadFrom(assemblyPath);
             Name = assembly.FullName;
+
 
             Type[] types = assembly.GetTypes();
             foreach (Type type in types)
@@ -28,14 +35,14 @@ namespace LabTres
                 FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
                 foreach (FieldInfo field in fields)
                 {
-                    MemberInfo memberInfo = new MemberInfo(field.Name, field.FieldType.Name);
+                    MemberInfo memberInfo = new MemberInfo(field.Name, field.FieldType.Name, field.FieldType.FullName);
                     typeInfo.Members.Add(memberInfo);
                 }
 
                 PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
                 foreach (PropertyInfo property in properties)
                 {
-                    MemberInfo memberInfo = new MemberInfo(property.Name, property.PropertyType.Name);
+                    MemberInfo memberInfo = new MemberInfo(property.Name, property.PropertyType.Name, property.PropertyType.FullName);
                     typeInfo.Members.Add(memberInfo);
                 }
 
@@ -44,8 +51,9 @@ namespace LabTres
                 {
                     string returnType = method.ReturnType.Name;
                     string methodName = method.Name;
-                    string signature = $"{returnType} {methodName}({GetParameterList(method.GetParameters())})";
-                    MemberInfo memberInfo = new MemberInfo(methodName, signature);
+                    string parameterList = GetParameterList(method.GetParameters());
+                    string signature = $"{returnType} {methodName}({parameterList})";
+                    MemberInfo memberInfo = new MemberInfo(methodName, signature, returnType);
                     typeInfo.Members.Add(memberInfo);
                 }
 
@@ -106,11 +114,13 @@ namespace LabTres
     {
         public string Name { get; set; }
         public string Signature { get; set; }
+        public string Type { get; set; }
 
-        public MemberInfo(string name, string signature)
+        public MemberInfo(string name, string signature, string type)
         {
             Name = name;
             Signature = signature;
+            Type = type;
         }
     }
 }

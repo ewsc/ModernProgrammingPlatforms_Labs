@@ -19,7 +19,6 @@ namespace LabTres
 
         public MainWindowViewModel()
         {
-            // Specify the path to your .NET assembly here
             string assemblyPath = "X:/1Third_Year/MPP/ModernProgrammingPlatforms_Labs/LabTres/LabTres/bin/Debug/net8.0-windows/LabTres.dll";
             // string assemblyPath = "X:/1Third_Year/GraduationProject_Bimqa/Bimqa/bin/Debug/OpenTK.dll";
             Assembly = new AssemblyInfo(assemblyPath);

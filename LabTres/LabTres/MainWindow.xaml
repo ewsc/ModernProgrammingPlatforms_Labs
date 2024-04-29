@@ -10,10 +10,25 @@
         <TreeView ItemsSource="{Binding Assembly.Namespaces}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Types}">
-                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock>
+                        <Run Text="{Binding Name}" />
+                        <Run Text=" (Namespace)" FontStyle="Italic" />
+                    </TextBlock>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Members}">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock>
+                                <Run Text="{Binding Name}" />
+                                <Run Text=" (Member)" FontStyle="Italic" />
+                            </TextBlock>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text=" : " />
+                                        <Run Text="{Binding Type}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
