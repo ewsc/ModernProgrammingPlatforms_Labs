@@ -43,9 +43,17 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.10.0-3.final, )"
+            },
             "NUnit": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "RavenDB.Embedded": {
+              "target": "Package",
+              "version": "[6.0.102, )"
             }
           },
           "imports": [
