@@ -4,7 +4,14 @@ namespace LabTres
 {
     public class TEST_CLASS_NAME
     {
-        
+        public String TEST_STRING;
+        public int TEST_INT;
+        public float TEST_FLOAT;
+
+        public void TEST_VOID()
+        {
+            return;
+        }
     }
     
     public class AssemblyInfo
