@@ -1,16 +1,20 @@
-﻿namespace LabQuatro;
+﻿using TestGenerator;
 
-public static class Program
+namespace LabQuatro;
+
+public class Program
 {
     public static async Task Main(string[] args)
     {
-        string[] sourceFiles = { "source/Tracer.cs" };
-        string outputPath = "output";
-        int maxFilesToLoad = 5;
-        int maxConcurrentTasks = 10;
-        int maxFilesToWrite = 5;
-        
-        TestClassGenerator generator = new TestClassGenerator(sourceFiles, outputPath, maxFilesToLoad, maxConcurrentTasks, maxFilesToWrite);
-        await generator.GenerateTestClassesAsync();
+        List<string> sourceFiles = new List<string>
+        {
+            "source/Tracer.cs",
+            // ...
+        };
+
+        string outputPath = "output/";
+
+        var generator = new NUnitTestGenerator();
+        await generator.GenerateTestsAsync(sourceFiles, outputPath);
     }
 }

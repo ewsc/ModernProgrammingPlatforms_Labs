@@ -2,153 +2,99 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NUnit.Framework;
 
-namespace LabQuatro
+namespace TestGenerator
 {
-    public class TestClassGenerator
+    public class NUnitTestGenerator
     {
-        private readonly string[] _sourceFiles;
-        private readonly string _outputPath;
-        private readonly int _maxFilesToLoad;
-        private readonly int _maxConcurrentTasks;
-        private readonly int _maxFilesToWrite;
-        
-        private readonly TaskCompletionSource<bool> _writeFilesCompletion = new TaskCompletionSource<bool>();
-
-        public TestClassGenerator(string[] sourceFiles, string outputPath, int maxFilesToLoad, int maxConcurrentTasks,
-            int maxFilesToWrite)
+        public async Task GenerateTestsAsync(List<string> sourceFiles, string outputPath)
         {
-            _sourceFiles = sourceFiles;
-            _outputPath = outputPath;
-            _maxFilesToLoad = maxFilesToLoad;
-            _maxConcurrentTasks = maxConcurrentTasks;
-            _maxFilesToWrite = maxFilesToWrite;
-        }
-
-        public async Task GenerateTestClassesAsync()
-        {
-            var loadFilesBlock = new TransformBlock<string, string>(
-                sourceFile => LoadFileAsync(sourceFile),
-                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = _maxFilesToLoad });
-
-            var generateTestsBlock = new TransformBlock<string, string>(
-                sourceCode => GenerateTestClassAsync(sourceCode),
-                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = _maxConcurrentTasks });
-
-            var writeFilesBlock = new ActionBlock<string>(
-                testClassCode => WriteTestClassAsync(testClassCode),
-                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = _maxFilesToWrite });
-
-            var linkOptions = new DataflowLinkOptions { PropagateCompletion = true };
-
-            loadFilesBlock.LinkTo(generateTestsBlock, linkOptions);
-            generateTestsBlock.LinkTo(writeFilesBlock, linkOptions);
-
-            foreach (var sourceFile in _sourceFiles)
+            var loadFilesBlock = new TransformBlock<string, string>(async filePath =>
             {
-                await loadFilesBlock.SendAsync(sourceFile);
-            }
-
-            loadFilesBlock.Complete();
-
-            await writeFilesBlock.Completion;
-
-            // Set completion for the entire process
-            loadFilesBlock.Completion.ContinueWith(_ =>
-            {
-                if (_.IsFaulted)
+                using (var reader = File.OpenText(filePath))
                 {
-                    ((IDataflowBlock)generateTestsBlock).Fault(_.Exception);
-                }
-                else
-                {
-                    generateTestsBlock.Complete();
+                    return await reader.ReadToEndAsync();
                 }
             });
 
-            await generateTestsBlock.Completion;
-        }
-
-        private async Task<string> LoadFileAsync(string sourceFile)
-        {
-            using (var reader = new StreamReader(sourceFile))
+            var generateTestsBlock = new TransformManyBlock<string, string>(async sourceCode =>
             {
-                return await reader.ReadToEndAsync();
+                var testClasses = await GenerateTestClassesAsync(sourceCode);
+                return testClasses;
+            });
+
+            var writeFilesBlock = new ActionBlock<string>(async testCode =>
+            {
+                string fileName = GetUniqueFileName(outputPath);
+                await WriteToFileAsync(fileName, testCode);
+            });
+
+            loadFilesBlock.LinkTo(generateTestsBlock, new DataflowLinkOptions { PropagateCompletion = true });
+            generateTestsBlock.LinkTo(writeFilesBlock, new DataflowLinkOptions { PropagateCompletion = true });
+
+            foreach (var file in sourceFiles)
+            {
+                await loadFilesBlock.SendAsync(file);
             }
+
+            loadFilesBlock.Complete();
+            await writeFilesBlock.Completion;
         }
 
-        private async Task<string> GenerateTestClassAsync(string sourceCode)
+        private async Task<IEnumerable<string>> GenerateTestClassesAsync(string sourceCode)
         {
-            // Parse the source code into a SyntaxTree
-            var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
+            await Task.Delay(100); // Демонстрационная задержка
 
-            // Get the root of the syntax tree
-            var root = await syntaxTree.GetRootAsync();
+            List<string> testClasses = new List<string>();
 
-            // Find all public methods in the syntax tree
-            var publicMethods = root.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .Where(m => m.Modifiers.Any(SyntaxKind.PublicKeyword));
+            // Генерация тестовых классов
+            // В данном примере создаем один тестовый класс с пустыми тестами для каждого публичного метода
+            // TODO: Добавьте свою логику генерации тестовых классов
 
-            // Create a new SyntaxTree for the test class
-            var testClassSyntax = SyntaxFactory.CompilationUnit()
-                .AddUsings(
-                    SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("System")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("System.Collections.Generic")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("System.Linq")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("System.Text")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("NUnit.Framework")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("MyCode")))
-                .AddMembers(
-                    SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("MyCode.Tests"))
-                        .AddMembers(
-                            SyntaxFactory.ClassDeclaration("MyClassTests")
-                                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                                .AddAttributeLists(SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList(
-                                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("TestFixture"))))))
-                        .AddMembers((MemberDeclarationSyntax[])publicMethods.Select(method =>
-                            SyntaxFactory
-                                .MethodDeclaration(
-                                    SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
-                                    $"{method.Identifier}Test")
-                                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                                .AddAttributeLists(SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList(
-                                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Test")))))
-                                .WithBody(SyntaxFactory.Block(
-                                    SyntaxFactory.ExpressionStatement(
-                                        SyntaxFactory.InvocationExpression(
-                                                SyntaxFactory.MemberAccessExpression(
-                                                    SyntaxKind.SimpleMemberAccessExpression,
-                                                    SyntaxFactory.IdentifierName("Assert"),
-                                                    SyntaxFactory.IdentifierName("Fail")))
-                                            .WithArgumentList(
-                                                SyntaxFactory.ArgumentList(
-                                                    SyntaxFactory.SingletonSeparatedList(
-                                                        SyntaxFactory.Argument(
-                                                            SyntaxFactory.LiteralExpression(
-                                                                SyntaxKind.StringLiteralExpression,
-                                                                SyntaxFactory.Literal("autogenerated"))))))))))))
-                .NormalizeWhitespace();
+            testClasses.Add(@"using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using NUnit.Framework;
 
-            // Convert the SyntaxTree to a string
-            var generatedCode = testClassSyntax.ToFullString();
-            return generatedCode;
+namespace MyCode.Tests
+{
+    [TestFixture]
+    public class MyClassTests
+    {
+        [Test]
+        public void FirstMethodTest()
+        {
+            Assert.Fail(""autogenerated"");
         }
 
-        private async Task WriteTestClassAsync(string testClassCode)
+        [Test]
+        public void SecondMethodTest()
         {
-            var fileName = Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".cs";
-            var filePath = Path.Combine(_outputPath, fileName);
+            Assert.Fail(""autogenerated"");
+        }
+        // ...
+    }
+}");
 
-            using (var writer = new StreamWriter(filePath))
+            return testClasses;
+        }
+
+        private string GetUniqueFileName(string outputPath)
+        {
+            string fileName = Guid.NewGuid().ToString() + ".cs";
+            return Path.Combine(outputPath, fileName);
+        }
+
+        private async Task WriteToFileAsync(string fileName, string content)
+        {
+            using (var writer = new StreamWriter(fileName))
             {
-                await writer.WriteAsync(testClassCode);
+                await writer.WriteAsync(content);
             }
         }
     }
